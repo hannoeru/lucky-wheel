@@ -1,0 +1,38 @@
+body,
+html {
+  background: #5858b9;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+}
+#wheel {
+  width: 549px;
+  height: 549px;
+  background: transparent url('../img/wheel-outside.svg') 0% 0% no-repeat
+    padding-box;
+}
+#hand {
+  position: absolute;
+  width: 131px;
+  height: 287px;
+  background: transparent url('../img/hand.svg') 0% 0% no-repeat padding-box;
+}
+.press {
+  height: 103px;
+  width: 103px;
+  position: relative;
+  top: 94px;
+  left: 13px;
+  background: #1f1172;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  color: #ff00ba;
+  font-size: 32px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
