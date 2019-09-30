@@ -9,19 +9,40 @@
       href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div id="wheel">
-      <div class="prize"></div>
-      <div class="prize"></div>
-      <div class="prize"></div>
-      <div class="prize"></div>
-      <div class="prize"></div>
-      <div class="prize"></div>
+      <div id="prize-box">
+        <div
+          class="prize"
+          :style="{ transform: transformHandler(index)}"
+          v-for="(item, index) in generateContent()"
+        >
+          <div class="prize-content" :class="{ small : !checkYear() }">
+            <div class="prize-icon" v-if="checkYear()">
+              <i class="material-icons">
+                {{ item.icon }}
+              </i>
+            </div>
+            <div class="prize-text">
+              {{ checkYear() ? item.text : item + 1 }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="hand">
+        <button class="press">PRESS</button>
+      </div>
+      <div id="change-year">
+        <button class="press" @click="changeYear()">Change</button>
+      </div>
     </div>
-    <div id="hand" style="transform: rotate(50deg);">
-      <button class="press">PRESS</button>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

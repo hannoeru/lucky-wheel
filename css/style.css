@@ -12,21 +12,38 @@ html {
 #wheel {
   width: 549px;
   height: 549px;
-  background: transparent url('../img/wheel-outside.svg') 0% 0% no-repeat
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#wheel::after {
+  content: '';
+  width: 549px;
+  height: 549px;
+  background: transparent url('../img/wheel-outside.svg') 50% 50% no-repeat
     padding-box;
+  position: absolute;
+  z-index: 10;
 }
 #hand {
   position: absolute;
-  width: 131px;
-  height: 287px;
-  background: transparent url('../img/hand.svg') 0% 0% no-repeat padding-box;
+  width: 200px;
+  height: 289px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#hand::after {
+  content: '';
+  width: 200px;
+  height: 289px;
+  background: transparent url('../img/hand.svg') 50% 0% no-repeat padding-box;
+  position: absolute;
+  z-index: 10;
 }
 .press {
-  height: 103px;
-  width: 103px;
-  position: relative;
-  top: 94px;
-  left: 13px;
+  height: 105px;
+  width: 105px;
   background: #1f1172;
   outline: none;
   border: none;
@@ -35,4 +52,63 @@ html {
   color: #ff00ba;
   font-size: 32px;
   font-family: 'Roboto Condensed', sans-serif;
+  z-index: 5;
+}
+#change-year {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+/** PRIZE **/
+#prize-box {
+  width: 497px;
+  height: 497px;
+  border-radius: 50%;
+  background-color: #343caa;
+  z-index: 1;
+  position: absolute;
+  overflow: hidden;
+}
+.prize {
+  width: 50%;
+  height: 50%;
+  background-color: #f0beff;
+  color: #343caa;
+  border: 1px solid #1f1172;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: 0 100%;
+  box-sizing: border-box;
+}
+.prize:nth-of-type(2n) {
+  background-color: #343caa;
+  color: #f0beff;
+}
+.prize-content {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  position: absolute;
+  transform: skewY(30deg) rotate(30deg) translate(70px, 32px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.small {
+  width: 60px;
+  height: 60px;
+  transform: skewY(72deg) rotate(9deg) translate(19px, 100px);
+}
+.prize-icon i {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 4rem;
+  display: inline;
+}
+.prize-text {
+  font-size: 2rem;
+  display: inline;
 }
