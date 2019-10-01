@@ -32,6 +32,9 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 6s cubic-bezier(0.38, 0.22, 0.1, 0.99) 0s;
+  z-index: 15;
+  transform-origin: 100px 145px;
 }
 #hand::after {
   content: '';
@@ -39,7 +42,8 @@ html {
   height: 289px;
   background: transparent url('../img/hand.svg') 50% 0% no-repeat padding-box;
   position: absolute;
-  z-index: 10;
+  z-index: 20;
+  pointer-events: none;
 }
 .press {
   height: 105px;
@@ -52,7 +56,7 @@ html {
   color: #ff00ba;
   font-size: 32px;
   font-family: 'Roboto Condensed', sans-serif;
-  z-index: 5;
+  z-index: 15;
 }
 #change-year {
   position: absolute;

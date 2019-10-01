@@ -20,22 +20,29 @@
       <div id="prize-box">
         <div
           class="prize"
-          :style="{ transform: transformHandler(index)}"
+          :style="{ transform: transformHandler(index) }"
           v-for="(item, index) in generateContent()"
         >
-          <div class="prize-content" :class="{ small : !checkYear() }">
-            <div class="prize-icon" v-if="checkYear()">
+          <div
+            class="prize-content"
+            :class="{ small : dataCache[year].length > 10}"
+          >
+            <div class="prize-icon" v-if="year === '2017'">
               <i class="material-icons">
                 {{ item.icon }}
               </i>
             </div>
             <div class="prize-text">
-              {{ checkYear() ? item.text : item + 1 }}
+              {{ textOrNumber(item) }}
             </div>
           </div>
         </div>
       </div>
-      <div id="hand">
+      <div
+        id="hand"
+        @click="pressHandler()"
+        :style="{transform: rotateHandler()}"
+      >
         <button class="press">PRESS</button>
       </div>
       <div id="change-year">
@@ -43,6 +50,7 @@
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
