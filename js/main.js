@@ -6,7 +6,6 @@ let data = {
   degree: 0,
   active: -1
 }
-
 let app = new Vue({
   el: '#wheel',
   data: data,
@@ -48,7 +47,7 @@ let app = new Vue({
           console.log(`Error! HTTP Status: ${status} ${statusText}`)
         })
     },
-    transformHandler(index) {
+    transformHandler(index, location) {
       let len = this.dataCache[this.year].length
       let rotate = 360 / len
       let rotateFrom = -rotate / 2
@@ -61,7 +60,14 @@ let app = new Vue({
         //   '頃斜角度：' + skewY
         // )
       }
-      return `rotate(${rotateFrom + index * rotate}deg) skewY(${skewY}deg)`
+      if (location === 'prize') {
+        return `rotate(${rotateFrom + index * rotate}deg) skewY(${skewY}deg)`
+      }
+      if (location === 'content') {
+        let translate =
+          len > 10 ? 'translate(19px, 110px)' : 'translate(70px, 45px)'
+        return `skewY(${90 - rotate}deg) rotate(${rotate / 2}deg) ${translate}`
+      }
     },
     generateContent() {
       return this.dataCache[this.year]
@@ -73,6 +79,13 @@ let app = new Vue({
       }
       return indexArray
     },
+    getIcon() {
+      if (this.active > -1) {
+        return this.year === '2017'
+          ? this.dataCache[this.year][this.active].icon
+          : 'cake'
+      }
+    },
     textOrNumber(item, location) {
       if (location === 'prize') {
         return this.year === '2017' ? item.text : item.num
@@ -83,10 +96,12 @@ let app = new Vue({
           : this.dataCache[this.year][this.active].num
       }
     },
-    changeYear() {
-      if (this.isPressed) return
-      this.year === '2017' ? (this.year = '2018') : (this.year = '2017')
-      this.degree += 360 - (this.degree % 360)
+    changeYear(year) {
+      if (this.isPressed || this.year == year) return
+      this.year = year
+      if (this.degree % 360 != 0) {
+        this.degree += 360 - (this.degree % 360)
+      }
       this.active = -1
     },
     getRandomNumber(data) {
@@ -121,7 +136,12 @@ let app = new Vue({
       return `rotate(${this.degree}deg)`
     },
     restart() {
+      if (this.isPressed) return
       this.getData()
+      if (this.degree % 360 != 0) {
+        this.degree += 360 - (this.degree % 360)
+      }
+      this.active = -1
     }
   }
 })

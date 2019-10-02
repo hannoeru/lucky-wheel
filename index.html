@@ -21,11 +21,12 @@
         <div
           class="prize"
           :class="{active : active === index}"
-          :style="{ transform: transformHandler(index) }"
+          :style="{ transform: transformHandler(index, 'prize') }"
           v-for="(item, index) in generateContent()"
         >
           <div
             class="prize-content"
+            :style="{ transform: transformHandler(index, 'content') }"
             :class="{ small : dataCache[year].length > 10}"
           >
             <div class="prize-icon" v-if="year === '2017'">
@@ -50,15 +51,31 @@
         <button class="press">PRESS</button>
       </div>
       <div id="change-year">
-        <button class="press" @click="changeYear()">Change</button>
+        <button
+          class="years"
+          @click="changeYear(item)"
+          v-for="item in Object.keys(dataCache)"
+        >
+          {{ item }}
+        </button>
+        <button class="years refresh" @click="restart()">
+          <i class="material-icons">
+            refresh
+          </i>
+        </button>
       </div>
       <div id="well-done" v-if="active > -1">
         <div class="text">
-          <p>Well<br />Done!</p>
+          <p>WELL<br />DONE!</p>
         </div>
         <div class="get">
           <p>YOUR GET A FREE...</p>
           <p class="item">{{ textOrNumber(dataCache, 'well-done') }}!</p>
+        </div>
+        <div class="icon" v-for="index in 10">
+          <i class="material-icons">
+            {{ getIcon() }}
+          </i>
         </div>
       </div>
     </div>

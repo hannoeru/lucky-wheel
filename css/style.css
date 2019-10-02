@@ -61,10 +61,31 @@ p {
   font-family: 'Roboto Condensed', sans-serif;
   z-index: 15;
 }
+.years {
+  height: 35px;
+  width: 80px;
+  background: #1f1172;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+  color: #ff00ba;
+  font-size: 18px;
+  font-family: 'Roboto Condensed', sans-serif;
+  z-index: 15;
+  margin-left: 10px;
+}
+.refresh {
+  background: #f0beff;
+  color: #343caa;
+  padding-top: 2px;
+}
 #change-year {
   position: absolute;
   top: 20px;
   left: 20px;
+  display: flex;
+  align-items: center;
 }
 /** PRIZE **/
 #prize-box {
@@ -72,7 +93,7 @@ p {
   height: 497px;
   border-radius: 50%;
   background-color: #343caa;
-  z-index: 1;
+  z-index: 4;
   position: absolute;
   overflow: hidden;
 }
@@ -105,7 +126,6 @@ p {
   height: 100px;
   display: flex;
   position: absolute;
-  transform: skewY(30deg) rotate(30deg) translate(70px, 45px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,7 +134,6 @@ p {
 .small {
   width: 60px;
   height: 60px;
-  transform: skewY(72deg) rotate(9deg) translate(19px, 110px);
 }
 .prize-icon i {
   font-family: 'Material Icons';
@@ -148,17 +167,69 @@ p {
   justify-content: space-between;
   align-items: center;
   color: white;
+  overflow: hidden;
 }
 #well-done .text {
   font-size: 72px;
-  margin-left: 158px;
+  margin-left: 8%;
+  line-height: 72px;
+  z-index: 5;
 }
 #well-done .get {
   font-size: 32px;
-  margin-right: 101px;
+  margin-right: 6%;
+  z-index: 3;
 }
 #well-done .get .item {
   font-size: 72px;
   color: #ff00ba;
   text-decoration: underline;
+}
+#well-done .icon {
+  position: absolute;
+  top: 150px;
+  left: -1%;
+  z-index: 2;
+}
+#well-done .icon:nth-of-type(3) {
+  top: 25px;
+  left: 2%;
+  transform: rotate(20deg);
+}
+#well-done .icon:nth-of-type(4) {
+  top: 210px;
+  left: 5%;
+  transform: rotate(-30deg);
+}
+#well-done .icon:nth-of-type(5) {
+  top: -10px;
+  left: 20%;
+  transform: rotate(-30deg);
+}
+#well-done .icon:nth-of-type(6) {
+  top: 150px;
+  left: 28%;
+}
+#well-done .icon:nth-of-type(7) {
+  top: -5px;
+  left: 70%;
+}
+#well-done .icon:nth-of-type(8) {
+  top: 210px;
+  left: 78%;
+  transform: rotate(20deg);
+}
+#well-done .icon:nth-of-type(9) {
+  top: 150px;
+  left: 92%;
+  transform: rotate(-20deg);
+}
+#well-done .icon:nth-child(10) {
+  top: 20px;
+  left: 98%;
+  transform: rotate(20deg);
+}
+#well-done .icon i {
+  font-size: 3rem;
+  color: #22299b;
 }
