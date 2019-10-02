@@ -1,9 +1,10 @@
 let data = {
   dataCache: {},
-  counts: [],
+  counts: {},
   year: '2017',
   isPressed: false,
-  degree: 0
+  degree: 0,
+  active: -1
 }
 
 let app = new Vue({
@@ -53,41 +54,74 @@ let app = new Vue({
       let rotateFrom = -rotate / 2
       let skewY = rotate - 90
       if (index === 0) {
-        console.log(
-          '數量：' + len,
-          '開始角度：' + rotateFrom,
-          '旋轉角度：' + rotate,
-          '頃斜角度：' + skewY
-        )
+        // console.log(
+        //   '數量：' + len,
+        //   '開始角度：' + rotateFrom,
+        //   '旋轉角度：' + rotate,
+        //   '頃斜角度：' + skewY
+        // )
       }
       return `rotate(${rotateFrom + index * rotate}deg) skewY(${skewY}deg)`
     },
     generateContent() {
       return this.dataCache[this.year]
     },
-    textOrNumber(item) {
-      return this.year === '2017' ? item.text : item.num
+    generateIndex(data) {
+      let indexArray = []
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].count !== 0) indexArray.push(i)
+      }
+      return indexArray
+    },
+    textOrNumber(item, location) {
+      if (location === 'prize') {
+        return this.year === '2017' ? item.text : item.num
+      }
+      if (location === 'well-done') {
+        return this.year === '2017'
+          ? this.dataCache[this.year][this.active].text
+          : this.dataCache[this.year][this.active].num
+      }
     },
     changeYear() {
       if (this.isPressed) return
       this.year === '2017' ? (this.year = '2018') : (this.year = '2017')
+      this.degree += 360 - (this.degree % 360)
+      this.active = -1
     },
-    generateCounts() {},
+    getRandomNumber(data) {
+      const index = this.generateIndex(data)
+      let num = Math.floor(Math.random() * index.length)
+      return index[num]
+    },
     pressHandler() {
       if (this.isPressed) return
+      this.active = -1
+      let data = this.dataCache[this.year]
+      let index = this.getRandomNumber(data)
+      if (index == undefined) return
       this.isPressed = true
-      let len = this.dataCache[this.year].length
-      let index = Math.floor(Math.random() * len)
-      console.log('獎項：' + (index + 1))
       let circle = 6
+      let len = data.length
       let rotate = circle * 360 + index * (360 / len)
       this.degree += rotate - (this.degree % 360)
       setTimeout(() => {
+        this.active = index
+        if (data[index].count > 0) {
+          data[index].count -= 1
+        }
+        console.log(
+          this.year + '年，獎項：' + (index + 1),
+          '剩餘：' + data[index].count + '個'
+        )
         this.isPressed = false
       }, 6000)
     },
     rotateHandler() {
       return `rotate(${this.degree}deg)`
+    },
+    restart() {
+      this.getData()
     }
   }
 })

@@ -20,6 +20,7 @@
       <div id="prize-box">
         <div
           class="prize"
+          :class="{active : active === index}"
           :style="{ transform: transformHandler(index) }"
           v-for="(item, index) in generateContent()"
         >
@@ -33,7 +34,10 @@
               </i>
             </div>
             <div class="prize-text">
-              {{ textOrNumber(item) }}
+              {{ textOrNumber(item, 'prize') }}
+            </div>
+            <div class="prize-count">
+              {{ item.count }}
             </div>
           </div>
         </div>
@@ -47,6 +51,15 @@
       </div>
       <div id="change-year">
         <button class="press" @click="changeYear()">Change</button>
+      </div>
+      <div id="well-done" v-if="active > -1">
+        <div class="text">
+          <p>Well<br />Done!</p>
+        </div>
+        <div class="get">
+          <p>YOUR GET A FREE...</p>
+          <p class="item">{{ textOrNumber(dataCache, 'well-done') }}!</p>
+        </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>

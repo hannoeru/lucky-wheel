@@ -9,6 +9,9 @@ html {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
 }
+p {
+  margin: 0;
+}
 #wheel {
   width: 549px;
   height: 549px;
@@ -85,6 +88,14 @@ html {
   transform-origin: 0 100%;
   box-sizing: border-box;
 }
+.prize.active {
+  background-color: #ff00ba;
+  color: white;
+}
+.prize.active:nth-of-type(2n) {
+  background-color: #ff00ba;
+  color: white;
+}
 .prize:nth-of-type(2n) {
   background-color: #343caa;
   color: #f0beff;
@@ -94,7 +105,7 @@ html {
   height: 100px;
   display: flex;
   position: absolute;
-  transform: skewY(30deg) rotate(30deg) translate(70px, 32px);
+  transform: skewY(30deg) rotate(30deg) translate(70px, 45px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,16 +114,51 @@ html {
 .small {
   width: 60px;
   height: 60px;
-  transform: skewY(72deg) rotate(9deg) translate(19px, 100px);
+  transform: skewY(72deg) rotate(9deg) translate(19px, 110px);
 }
 .prize-icon i {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: 4rem;
-  display: inline;
 }
 .prize-text {
   font-size: 2rem;
-  display: inline;
+}
+.prize-count {
+  height: 45px;
+  width: 30px;
+  background-color: #343caa;
+  color: #f0beff;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+.prize:nth-of-type(2n) .prize-count {
+  background-color: #f0beff;
+  color: #343caa;
+}
+/** Well Done! **/
+#well-done {
+  width: 100%;
+  height: 237px;
+  position: absolute;
+  background: #343baa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+#well-done .text {
+  font-size: 72px;
+  margin-left: 158px;
+}
+#well-done .get {
+  font-size: 32px;
+  margin-right: 101px;
+}
+#well-done .get .item {
+  font-size: 72px;
+  color: #ff00ba;
+  text-decoration: underline;
 }

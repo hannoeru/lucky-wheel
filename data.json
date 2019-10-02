@@ -8,27 +8,27 @@
     {
       "icon": "cake",
       "text": "Wish",
-      "count": 4
+      "count": 2
     },
     {
       "icon": "stars",
       "text": "Anything",
-      "count": 5
+      "count": 1
     },
     {
       "icon": "child_care",
       "text": "Child",
-      "count": 5
+      "count": 1
     },
     {
       "icon": "flight",
       "text": "Flight",
-      "count": 5
+      "count": 1
     },
     {
       "icon": "wifi",
       "text": "Wifi",
-      "count": 6
+      "count": 1
     }
   ],
   "2018": [
