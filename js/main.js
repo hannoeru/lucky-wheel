@@ -1,6 +1,5 @@
 let data = {
   dataCache: {},
-  counts: {},
   year: '2017',
   isPressed: false,
   degree: 0,
@@ -20,7 +19,7 @@ let app = new Vue({
         .then(function(res) {
           const keys = Object.keys(res.data)
           keys.forEach(item => {
-            vm.$set(vm.dataCache, item, res.data[item])
+            Vue.set(vm.dataCache, item, res.data[item])
           })
           const thisYear = vm.dataCache[2018]
           for (let i = 0; i < thisYear.length; i++) {
@@ -52,14 +51,14 @@ let app = new Vue({
       let rotate = 360 / len
       let rotateFrom = -rotate / 2
       let skewY = rotate - 90
-      if (index === 0) {
-        // console.log(
-        //   '數量：' + len,
-        //   '開始角度：' + rotateFrom,
-        //   '旋轉角度：' + rotate,
-        //   '頃斜角度：' + skewY
-        // )
-      }
+      // if (index === 0) {
+      //   console.log(
+      //     '數量：' + len,
+      //     '開始角度：' + rotateFrom,
+      //     '旋轉角度：' + rotate,
+      //     '頃斜角度：' + skewY
+      //   )
+      // }
       if (location === 'prize') {
         return `rotate(${rotateFrom + index * rotate}deg) skewY(${skewY}deg)`
       }
