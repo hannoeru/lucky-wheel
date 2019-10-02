@@ -69,9 +69,6 @@ let app = new Vue({
         return `skewY(${90 - rotate}deg) rotate(${rotate / 2}deg) ${translate}`
       }
     },
-    generateContent() {
-      return this.dataCache[this.year]
-    },
     generateIndex(data) {
       let indexArray = []
       for (let i = 0; i < data.length; i++) {

@@ -22,7 +22,7 @@
           class="prize"
           :class="{active : active === index}"
           :style="{ transform: transformHandler(index, 'prize') }"
-          v-for="(item, index) in generateContent()"
+          v-for="(item, index) in dataCache[year]"
         >
           <div
             class="prize-content"
