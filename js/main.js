@@ -12,39 +12,42 @@ let app = new Vue({
     this.getData()
   },
   methods: {
-    getData() {
+    async getData() {
       var vm = this
-      axios
+      await axios
         .get('./data.json')
         .then(function(res) {
           const keys = Object.keys(res.data)
           keys.forEach(item => {
             Vue.set(vm.dataCache, item, res.data[item])
           })
-          const thisYear = vm.dataCache[2018]
-          for (let i = 0; i < thisYear.length; i++) {
-            const keys = Object.keys(thisYear[i])
-            if (keys.indexOf('start') !== -1 && keys.indexOf('end') !== -1) {
-              const start = thisYear[i].start
-              const end = thisYear[i].end
-              const count = thisYear[i].count
-              let cache = []
-              for (let j = start; j <= end; j++) {
-                cache.push({
-                  num: j,
-                  count: count
-                })
-              }
-              thisYear.splice(i + 1, 0, ...cache)
-              thisYear.splice(i, 1)
-            }
-          }
           console.log(res.data)
         })
         .catch(function(err) {
-          const { status, statusText } = error.response
-          console.log(`Error! HTTP Status: ${status} ${statusText}`)
+          console.log(err)
         })
+      const thisYear = vm.dataCache[2018]
+      vm.initData(thisYear)
+      console.log(vm.dataCache)
+    },
+    initData(thisYear) {
+      for (let i = 0; i < thisYear.length; i++) {
+        const keys = Object.keys(thisYear[i])
+        if (keys.indexOf('start') !== -1 && keys.indexOf('end') !== -1) {
+          const start = thisYear[i].start
+          const end = thisYear[i].end
+          const count = thisYear[i].count
+          let cache = []
+          for (let j = start; j <= end; j++) {
+            cache.push({
+              num: j,
+              count: count
+            })
+          }
+          thisYear.splice(i + 1, 0, ...cache)
+          thisYear.splice(i, 1)
+        }
+      }
     },
     transformHandler(index, location) {
       let len = this.dataCache[this.year].length
@@ -67,13 +70,6 @@ let app = new Vue({
           len > 10 ? 'translate(19px, 110px)' : 'translate(70px, 45px)'
         return `skewY(${90 - rotate}deg) rotate(${rotate / 2}deg) ${translate}`
       }
-    },
-    generateIndex(data) {
-      let indexArray = []
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].count !== 0) indexArray.push(i)
-      }
-      return indexArray
     },
     getIcon() {
       if (this.active > -1) {
@@ -99,6 +95,13 @@ let app = new Vue({
         this.degree += 360 - (this.degree % 360)
       }
       this.active = -1
+    },
+    generateIndex(data) {
+      let indexArray = []
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].count !== 0) indexArray.push(i)
+      }
+      return indexArray
     },
     getRandomNumber(data) {
       const index = this.generateIndex(data)
