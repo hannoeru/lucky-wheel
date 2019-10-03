@@ -107,11 +107,11 @@ let app = new Vue({
     },
     pressHandler() {
       if (this.isPressed) return
-      this.active = -1
       let data = this.dataCache[this.year]
       let index = this.getRandomNumber(data)
       if (index == undefined) return
       this.isPressed = true
+      this.active = -1
       let circle = 6
       let len = data.length
       let rotate = circle * 360 + index * (360 / len)
